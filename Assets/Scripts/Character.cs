@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Mover))]
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     public Mover Mover { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Mover = GetComponent<Mover>();
     }

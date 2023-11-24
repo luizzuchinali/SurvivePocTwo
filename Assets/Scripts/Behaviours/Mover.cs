@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Mover : MonoBehaviour
 {
-    public float speed = 3.0f;
+    public float speed = 10;
 
     private CharacterController _characterController;
 
@@ -17,5 +17,12 @@ public class Mover : MonoBehaviour
         var direction = new Vector3(horizontal, 0, vertical);
         var movement = direction.normalized * speed;
         _characterController.SimpleMove(movement);
+    }
+
+    public void LookAt(Vector3 target)
+    {
+        var direction = target - transform.position;
+        var rotation = Quaternion.LookRotation(direction);
+        transform.rotation = rotation;
     }
 }

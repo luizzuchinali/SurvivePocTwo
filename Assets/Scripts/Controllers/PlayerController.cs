@@ -1,25 +1,25 @@
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject characterGameObject;
     public Transform characterSpawnPosition;
-
-
     public CinemachineVirtualCamera virtualCamera;
 
-    private Character _character;
+    private PlayerCharacter _character;
     private Transform _characterTransform;
 
-    private void Start()
+    private void Awake()
     {
         var instance = Instantiate(characterGameObject, characterSpawnPosition.position, Quaternion.identity);
 
-        _character = instance.GetComponent<Character>();
+        _character = instance.GetComponent<PlayerCharacter>();
         _characterTransform = _character.transform;
+    }
 
+    private void Start()
+    {
         virtualCamera.Follow = _characterTransform;
         virtualCamera.LookAt = _characterTransform;
     }
@@ -30,4 +30,6 @@ public class PlayerController : MonoBehaviour
         var vertical = Input.GetAxisRaw("Vertical");
         _character.Mover.Move(horizontal, vertical);
     }
+
+    public Vector3 GetCharacterPosition() => _characterTransform.position;
 }
