@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5255501752704213833
+--- !u!1 &1614848505110412229
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1366977748592631884}
-  - component: {fileID: 2499541869906734562}
+  - component: {fileID: 5046179478592008249}
+  - component: {fileID: 2351265496992754497}
   m_Layer: 0
-  m_Name: EnemyController
+  m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1366977748592631884
+--- !u!4 &5046179478592008249
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255501752704213833}
+  m_GameObject: {fileID: 1614848505110412229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.3138978, y: 17.859425, z: -25.366514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2499541869906734562
+--- !u!114 &2351265496992754497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255501752704213833}
+  m_GameObject: {fileID: 1614848505110412229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 727506f76e1547babf8c79dca6e5347b, type: 3}
+  m_Script: {fileID: 11500000, guid: fbb0dda193994ab3bc28e0cb42d61c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterGameObject: {fileID: 5069715476104719646, guid: 00f201c16e286a3409c66b6353a39378,
-    type: 3}
-  characterSpawnPosition: {fileID: 733375067323018, guid: 764ae498ce1cb6a40b22019e105668fb,
-    type: 3}
+  controllers:
+  - {fileID: 2975840350081783275, guid: 00f201c16e286a3409c66b6353a39378, type: 3}
+  spawnRate: 2

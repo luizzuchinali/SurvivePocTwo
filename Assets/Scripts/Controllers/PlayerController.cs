@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject characterGameObject;
-    public Transform characterSpawnPosition;
     public CinemachineVirtualCamera virtualCamera;
 
     private PlayerCharacter _character;
@@ -12,7 +11,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        var instance = Instantiate(characterGameObject, characterSpawnPosition.position, Quaternion.identity);
+        var localTransform = transform;
+        var instance = Instantiate(
+            characterGameObject,
+            localTransform.position,
+            Quaternion.identity,
+            localTransform
+        );
 
         _character = instance.GetComponent<PlayerCharacter>();
         _characterTransform = _character.transform;
