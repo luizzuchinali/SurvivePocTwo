@@ -31,17 +31,16 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         var playerCharacterPosition = _playerController.GetCharacterPosition();
+        var characterPosition = _characterTransform.position;
 
-        _character.Mover.LookAt(new Vector3(playerCharacterPosition.x, 0, playerCharacterPosition.z));
+        _character.Mover.LookAt(new Vector3(playerCharacterPosition.x, characterPosition.y, playerCharacterPosition.z));
 
-        var direction = playerCharacterPosition - _characterTransform.position;
+        var direction = playerCharacterPosition - characterPosition;
         var distance = direction.magnitude;
-        Debug.Log(direction);
         //TODO: get character range to attack if distance < range
-        if (distance > 0.4)
+        if (distance > 1.5)
         {
             var normalizedDir = direction.normalized;
-            Debug.Log(normalizedDir);
             _character.Mover.Move(normalizedDir.x, normalizedDir.z);
         }
     }
