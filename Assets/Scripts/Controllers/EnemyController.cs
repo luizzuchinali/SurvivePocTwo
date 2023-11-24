@@ -20,6 +20,17 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if (_character.Fighter.IsDead())
+        {
+            SceneEnemies.DestroyEnemy(GetInstanceID());
+            return;
+        }
+
+        MoveRoutine();
+    }
+
+    private void MoveRoutine()
+    {
         var playerCharacterPosition = _playerController.GetCharacterPosition();
         var characterPosition = _characterTransform.position;
 

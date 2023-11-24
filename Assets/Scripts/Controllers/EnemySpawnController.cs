@@ -21,6 +21,7 @@ public class EnemySpawnController : MonoBehaviour
         //TODO: use object pool if we have performance problems
         var random = new System.Random();
         var index = random.Next(1, controllers.Length) - 1;
-        Instantiate(controllers[index], transform.position, Quaternion.identity);
+        var instance = Instantiate(controllers[index], transform.position, Quaternion.identity);
+        SceneEnemies.AddEnemy(instance.GetInstanceID(), instance.transform);
     }
 }
