@@ -34,12 +34,14 @@ public class EnemyController : MonoBehaviour
 
         _character.Mover.LookAt(new Vector3(playerCharacterPosition.x, 0, playerCharacterPosition.z));
 
-        var direction = _characterTransform.position - playerCharacterPosition;
+        var direction = playerCharacterPosition - _characterTransform.position;
         var distance = direction.magnitude;
+        Debug.Log(direction);
         //TODO: get character range to attack if distance < range
-        if (distance > 0.5)
+        if (distance > 0.4)
         {
             var normalizedDir = direction.normalized;
+            Debug.Log(normalizedDir);
             _character.Mover.Move(normalizedDir.x, normalizedDir.z);
         }
     }
