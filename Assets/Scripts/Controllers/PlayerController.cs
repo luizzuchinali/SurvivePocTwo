@@ -1,5 +1,4 @@
 using Cinemachine;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -45,14 +44,15 @@ public class PlayerController : MonoBehaviour
 
     private void AttackRoutine()
     {
-        var enemyTransform = GetClosestEnemy();
+        var enemyDirection = GetClosestEnemyDirection();
+        _character.Fighter.Attack(GetCharacterPosition(), enemyDirection);
     }
 
-    private Transform GetClosestEnemy()
+    private Vector3 GetClosestEnemyDirection()
     {
-        Transform bestTarget = null;
         var closestDistanceSqr = Mathf.Infinity;
-        var currentPosition = transform.position;
+        var currentPosition = GetCharacterPosition();
+        var bestTargetDirection = Vector3.zero;
         foreach (var potentialTarget in SceneEnemies.GetAllEnemies())
         {
             var directionToTarget = potentialTarget.position - currentPosition;
@@ -60,11 +60,12 @@ public class PlayerController : MonoBehaviour
             if (dSqrToTarget < closestDistanceSqr)
             {
                 closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                bestTargetDirection = directionToTarget;
             }
         }
+        Debug.DrawRay(currentPosition, bestTargetDirection.normalized * 10, Color.red, 5f);
 
-        return bestTarget;
+        return bestTargetDirection.normalized;
     }
 
     public Vector3 GetCharacterPosition() => _characterTransform.position;
