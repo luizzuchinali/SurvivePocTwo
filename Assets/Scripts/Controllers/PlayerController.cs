@@ -1,32 +1,27 @@
 using Cinemachine;
 using UnityEngine;
 
+[RequireComponent(typeof(Mover), typeof(Fighter))]
 public class PlayerController : MonoBehaviour
 {
-    public GameObject characterGameObject;
     public CinemachineVirtualCamera virtualCamera;
 
-    private PlayerCharacter _character;
-    private Transform _characterTransform;
+    private Transform _transform;
+    private Mover _mover;
+    private Fighter _fighter;
 
     private void Awake()
     {
-        var localTransform = transform;
-        var instance = Instantiate(
-            characterGameObject,
-            localTransform.position,
-            Quaternion.identity,
-            localTransform
-        );
+        _transform = transform;
 
-        _character = instance.GetComponent<PlayerCharacter>();
-        _characterTransform = _character.transform;
+        _mover = GetComponent<Mover>();
+        _fighter = GetComponent<Fighter>();
     }
 
     private void Start()
     {
-        virtualCamera.Follow = _characterTransform;
-        virtualCamera.LookAt = _characterTransform;
+        virtualCamera.Follow = _transform;
+        virtualCamera.LookAt = _transform;
     }
 
     private void Update()
@@ -39,19 +34,19 @@ public class PlayerController : MonoBehaviour
     {
         var horizontal = Input.GetAxisRaw("Horizontal");
         var vertical = Input.GetAxisRaw("Vertical");
-        _character.Mover.Move(horizontal, vertical);
+        _mover.Move(horizontal, vertical);
     }
 
     private void AttackRoutine()
     {
         var enemyDirection = GetClosestEnemyDirection();
-        _character.Fighter.Attack(GetCharacterPosition(), enemyDirection);
+        _fighter.Attack(enemyDirection);
     }
 
     private Vector3 GetClosestEnemyDirection()
     {
         var closestDistanceSqr = Mathf.Infinity;
-        var currentPosition = GetCharacterPosition();
+        var currentPosition = _transform.position;
         var bestTargetDirection = Vector3.zero;
         foreach (var potentialTarget in SceneEnemies.GetAllEnemies())
         {
@@ -63,10 +58,9 @@ public class PlayerController : MonoBehaviour
                 bestTargetDirection = directionToTarget;
             }
         }
-        Debug.DrawRay(currentPosition, bestTargetDirection.normalized * 10, Color.red, 5f);
+
+        Debug.DrawRay(currentPosition, bestTargetDirection.normalized * 10, Color.red, 1f);
 
         return bestTargetDirection.normalized;
     }
-
-    public Vector3 GetCharacterPosition() => _characterTransform.position;
 }

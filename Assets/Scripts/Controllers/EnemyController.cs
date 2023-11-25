@@ -1,16 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-[RequireComponent(typeof(EnemyCharacter))]
+[RequireComponent(typeof(Mover), typeof(Fighter))]
 public class EnemyController : MonoBehaviour
 {
-    private EnemyCharacter _character;
     private PlayerController _playerController;
-    private Transform _characterTransform;
+
+    private Mover _mover;
+    private Fighter _fighter;
 
     private void Awake()
     {
-        _character = GetComponent<EnemyCharacter>();
-        _characterTransform = _character.transform;
+        _mover = GetComponent<Mover>();
+        _fighter = GetComponent<Fighter>();
     }
 
     private void Start()
@@ -20,7 +22,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (_character.Fighter.IsDead())
+        if (_fighter.IsDead())
         {
             SceneEnemies.DestroyEnemy(GetInstanceID());
             return;
@@ -31,10 +33,10 @@ public class EnemyController : MonoBehaviour
 
     private void MoveRoutine()
     {
-        var playerCharacterPosition = _playerController.GetCharacterPosition();
-        var characterPosition = _characterTransform.position;
+        var playerCharacterPosition = _playerController.transform.position;
+        var characterPosition = transform.position;
 
-        _character.Mover.LookAt(new Vector3(playerCharacterPosition.x, characterPosition.y, playerCharacterPosition.z));
+        _mover.LookAt(new Vector3(playerCharacterPosition.x, characterPosition.y, playerCharacterPosition.z));
 
         var direction = playerCharacterPosition - characterPosition;
         var distance = direction.magnitude;
@@ -42,7 +44,15 @@ public class EnemyController : MonoBehaviour
         if (distance > 1.5)
         {
             var normalizedDir = direction.normalized;
-            _character.Mover.Move(normalizedDir.x, normalizedDir.z);
+            _mover.Move(normalizedDir.x, normalizedDir.z);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag(Tags.PlayerSkill)) return;
+
+        var skill = other.GetComponent<BaseSkill>();
+        _fighter.TakeDamage(skill.damage);
     }
 }

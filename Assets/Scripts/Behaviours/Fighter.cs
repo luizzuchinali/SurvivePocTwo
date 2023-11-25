@@ -5,18 +5,28 @@ public class Fighter : MonoBehaviour
     public float health = 100f;
     public float maxHealth = 100f;
 
-    public BaseSkill baseSkillEffect;
+    public BaseSkill baseSkillEffectPrefab;
+
+    private float _nextAttackTime;
 
     private void Awake()
     {
         health = maxHealth;
     }
 
-    public virtual void Attack(Vector3 origin, Vector3 targetDirection)
+    public virtual void Attack(Vector3 targetDirection)
     {
-        var instance = Instantiate(baseSkillEffect, transform.position, Quaternion.identity);
-        instance.Launch(origin, targetDirection);
-        Destroy(instance, baseSkillEffect.duration);
+        if (IsDead()) return;
+        if (Time.time <= _nextAttackTime) return;
+
+        var position = transform.position;
+
+        var instance = Instantiate(baseSkillEffectPrefab, position, Quaternion.identity);
+
+        var angle = Vector3.SignedAngle(instance.transform.forward, targetDirection, Vector3.up);
+        instance.transform.Rotate(0, angle, 0);
+
+        _nextAttackTime = Time.time + baseSkillEffectPrefab.cooldown;
     }
 
     public virtual void TakeDamage(float damage)

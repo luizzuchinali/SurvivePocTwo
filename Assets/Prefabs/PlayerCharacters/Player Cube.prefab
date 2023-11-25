@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 4339072920433138570}
   - component: {fileID: 2180574447691557157}
   - component: {fileID: 4007320984452051718}
-  - component: {fileID: 7283794158747444948}
   - component: {fileID: 3087189221632088451}
   - component: {fileID: 3717322593040629822}
+  - component: {fileID: 1491384865705053154}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Player Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,18 +113,6 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7283794158747444948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2530045303532672951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0366ebeed9a48acb22503f7f12106ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3087189221632088451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,5 +140,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  baseSkillEffect: {fileID: -2213137875576293959, guid: 0979a0f53524f4d49b1e57b3cf517eb4,
+  baseSkillEffectPrefab: {fileID: -2213137875576293959, guid: 0979a0f53524f4d49b1e57b3cf517eb4,
     type: 3}
+--- !u!114 &1491384865705053154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2530045303532672951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff88315fbb031c3428c68eceba336d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 0}
