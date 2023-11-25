@@ -7,8 +7,6 @@ public class Fighter : MonoBehaviour
 
     public Attack baseAttackEffect;
 
-    public float attackPower = 10f;
-
     private void Awake()
     {
         health = maxHealth;
@@ -16,8 +14,7 @@ public class Fighter : MonoBehaviour
 
     public virtual void Attack(Vector3 direction)
     {
-        var instance = Instantiate(baseAttackEffect, transform.position, Quaternion.LookRotation(-direction));
-        Destroy(instance, 1f);
+        Instantiate(baseAttackEffect, transform.position, Quaternion.LookRotation(-direction));
         // Do attack here, e.g. play animation, deal damage, etc.
         Debug.Log($"{gameObject.name} has attacked {direction}.");
     }
