@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Debug.DrawRay(currentPosition, bestTargetDirection.normalized * 10, Color.red, 1f);
+        Debug.DrawRay(currentPosition, bestTargetDirection.normalized * 10, Color.red, Time.deltaTime);
 
         return bestTargetDirection.normalized;
     }
