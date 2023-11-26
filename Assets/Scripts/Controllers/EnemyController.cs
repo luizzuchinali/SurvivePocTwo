@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -57,9 +58,12 @@ public class EnemyController : MonoBehaviour
         var skill = other.GetComponent<BaseSkill>();
         _fighter.TakeDamage(skill.damage);
         var position = transform.position;
-        var instance = Instantiate(damageTextPrefab, new Vector3(position.x, position.y + 1.5f, position.z),
-            Quaternion.identity);
+
+        var startPos = new Vector3(position.x, position.y + 1.5f, position.z);
+        var instance = Instantiate(damageTextPrefab, startPos, Quaternion.identity);
+        instance.transform.DOJump(startPos + Vector3.up * 2, 2, 1, 0.4f);
         instance.SetText(skill.damage.ToString(CultureInfo.InvariantCulture));
         Destroy(instance.gameObject, 0.4f);
+        instance.DOKill(true);
     }
 }

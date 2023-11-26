@@ -47,3 +47,5 @@ MonoBehaviour:
   controllers:
   - {fileID: 2813818431683099754, guid: 00f201c16e286a3409c66b6353a39378, type: 3}
   spawnRate: 2
+  portalEffectPrefab: {fileID: 5607819269926399345, guid: 45e0f06c750176947862c10346226439,
+    type: 3}
