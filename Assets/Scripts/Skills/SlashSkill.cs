@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SlashSkill : BaseSkill
 {
@@ -11,13 +10,6 @@ public class SlashSkill : BaseSkill
         system.Stop();
         var systemMain = system.main;
         systemMain.duration = duration;
-        // var particleSystems = GetComponentsInChildren<ParticleSystem>();
-        // foreach (var particle in particleSystems)
-        // {
-        //     var main = particle.main;
-        //     main.duration = duration;
-        // }
-
         system.Play();
     }
 

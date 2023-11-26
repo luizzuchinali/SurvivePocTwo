@@ -33,9 +33,7 @@ public class Fighter : MonoBehaviour
     {
         health -= damage;
         if (health <= 0)
-        {
             Die();
-        }
     }
 
     private void Die()

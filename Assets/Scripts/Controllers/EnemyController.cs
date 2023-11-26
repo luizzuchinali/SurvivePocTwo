@@ -1,9 +1,11 @@
-﻿using System;
+﻿using System.Globalization;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(Fighter))]
 public class EnemyController : MonoBehaviour
 {
+    public TextMeshPro damageTextPrefab;
     private PlayerController _playerController;
 
     private Mover _mover;
@@ -54,5 +56,10 @@ public class EnemyController : MonoBehaviour
 
         var skill = other.GetComponent<BaseSkill>();
         _fighter.TakeDamage(skill.damage);
+        var position = transform.position;
+        var instance = Instantiate(damageTextPrefab, new Vector3(position.x, position.y + 1.5f, position.z),
+            Quaternion.identity);
+        instance.SetText(skill.damage.ToString(CultureInfo.InvariantCulture));
+        Destroy(instance.gameObject, 0.4f);
     }
 }
